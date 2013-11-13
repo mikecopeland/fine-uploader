@@ -1,3 +1,4 @@
+/*globals qq, MegaPixImage */
 /**
  * Draws a thumbnail of a Blob/File/URL onto an <img> or <canvas>.
  *
@@ -23,7 +24,7 @@ qq.ImageGenerator = function(log) {
     function isCanvasSupported() {
         var canvas = document.createElement("canvas");
 
-        return canvas.getContext && canvas.getContext("2d")
+        return canvas.getContext && canvas.getContext("2d");
     }
 
     // This is only meant to determine the MIME type of a renderable image file.
@@ -108,7 +109,7 @@ qq.ImageGenerator = function(log) {
             oldDrawImage.apply(this, arguments);
             promise.success(canvas);
             context.drawImage = oldDrawImage;
-        }
+        };
     }
 
     // Fulfills a `qq.Promise` when an image has been drawn onto the target,
@@ -275,7 +276,7 @@ qq.ImageGenerator = function(log) {
         generate: function(fileBlobOrUrl, container, options) {
             if (qq.isString(fileBlobOrUrl)) {
                 log("Attempting to update thumbnail based on server response.");
-                return drawFromUrl(fileBlobOrUrl, container, options || {})
+                return drawFromUrl(fileBlobOrUrl, container, options || {});
             }
             else {
                 log("Attempting to draw client-side image preview.");
