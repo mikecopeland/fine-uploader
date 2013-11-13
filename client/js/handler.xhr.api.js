@@ -1,3 +1,4 @@
+/* globals qq */
 /**
  * Common API exposed to creators of XHR handlers.  This is reused and possibly overriding in some cases by specific
  * XHR upload handlers.
