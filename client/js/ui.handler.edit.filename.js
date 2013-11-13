@@ -1,3 +1,4 @@
+/*globals qq */
 // Handles edit-related events on a file item (FineUploader mode).  This is meant to be a parent handler.
 // Children will delegate to this handler when specific edit-related actions are detected.
 qq.FilenameEditHandler = function(s, inheritedInternalApi) {
@@ -50,7 +51,7 @@ qq.FilenameEditHandler = function(s, inheritedInternalApi) {
     // The name has been updated if the filename edit input loses focus.
     function registerInputBlurHandler(inputEl, fileId) {
         inheritedInternalApi.getDisposeSupport().attach(inputEl, 'blur', function() {
-            handleNameUpdate(inputEl, fileId)
+            handleNameUpdate(inputEl, fileId);
         });
     }
 
@@ -61,7 +62,7 @@ qq.FilenameEditHandler = function(s, inheritedInternalApi) {
             var code = event.keyCode || event.which;
 
             if (code === 13) {
-                handleNameUpdate(inputEl, fileId)
+                handleNameUpdate(inputEl, fileId);
             }
         });
     }
