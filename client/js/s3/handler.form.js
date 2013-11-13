@@ -1,3 +1,4 @@
+/*globals qq */
 /**
  * Upload handler used by the upload to S3 module that assumes the current user agent does not have any support for the
  * File API, and, therefore, makes use of iframes and forms to submit the files directly to S3 buckets via the associated
@@ -12,7 +13,6 @@ qq.s3.UploadHandlerForm = function(options, uploadCompleteCallback, onUuidChange
     "use strict";
 
     var fileState = [],
-        uploadCompleteCallback = uploadCompleteCallback,
         log = logCallback,
         onCompleteCallback = options.onComplete,
         onUpload = options.onUpload,
@@ -78,6 +78,7 @@ qq.s3.UploadHandlerForm = function(options, uploadCompleteCallback, onUuidChange
     }
 
     function generateAwsParams(id) {
+        /*jshint -W040 */
         var customParams = paramsStore.getParams(id);
 
         customParams[filenameParam] = publicApi.getName(id);
