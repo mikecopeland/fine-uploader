@@ -1,3 +1,4 @@
+/*globals qq */
 // Child of FilenameEditHandler.  Used to detect focusin events on file edit input elements.
 qq.FilenameInputFocusInHandler = function(s, inheritedInternalApi) {
     "use strict";
