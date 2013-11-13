@@ -1,3 +1,4 @@
+/*globals qq */
 /**
  * Child of FilenameInputFocusInHandler.  Used to detect focus events on file edit input elements.  This child module is only
  * needed for UAs that do not support the focusin event.  Currently, only Firefox lacks this event.
