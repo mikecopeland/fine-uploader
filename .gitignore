@@ -4,6 +4,7 @@
 .*.sw[a-z]
 *.iml
 !.gitignore
+!.jshintrc
 Thumbs.db
 
 _build/
