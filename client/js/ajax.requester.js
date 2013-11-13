@@ -1,5 +1,5 @@
 /** Generic class for sending non-upload ajax requests and handling the associated responses **/
-/*globals qq, XMLHttpRequest*/
+/*globals qq, XDomainRequest*/
 qq.AjaxRequester = function (o) {
     "use strict";
 
@@ -190,7 +190,7 @@ qq.AjaxRequester = function (o) {
         log('Sending ' + method + " request for " + id);
 
         if (payload) {
-            xhr.send(payload)
+            xhr.send(payload);
         }
         else if (shouldParamsBeInQueryString || !params) {
             xhr.send();
@@ -210,6 +210,7 @@ qq.AjaxRequester = function (o) {
         var endpoint = options.endpointStore.getEndpoint(id),
             addToPath = requestData[id].addToPath;
 
+        /*jshint -W116 */
         if (addToPath != undefined) {
             endpoint += "/" + addToPath;
         }
@@ -237,7 +238,7 @@ qq.AjaxRequester = function (o) {
     function getXdrLoadHandler(id) {
         return function () {
             onComplete(id);
-        }
+        };
     }
 
     // This will be called by IE to indicate **failure** for an associated
@@ -245,7 +246,7 @@ qq.AjaxRequester = function (o) {
     function getXdrErrorHandler(id) {
         return function () {
             onComplete(id, true);
-        }
+        };
     }
 
     function setHeaders(id) {
