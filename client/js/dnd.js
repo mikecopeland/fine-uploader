@@ -19,8 +19,6 @@ qq.DragAndDrop = function(o) {
 
     qq.extend(options, o, true);
 
-    setupDragDrop();
-
     function uploadDroppedFiles(files, uploadDropZone) {
         options.callbacks.dropLog('Grabbed ' + files.length + " dropped files.");
         uploadDropZone.dropDisabled(false);
@@ -162,8 +160,11 @@ qq.DragAndDrop = function(o) {
     }
 
     function leavingDocumentOut(e) {
-        return ((qq.chrome() || (qq.safari() && qq.windows())) && e.clientX == 0 && e.clientY == 0) // null coords for Chrome and Safari Windows
-            || (qq.firefox() && !e.relatedTarget); // null e.relatedTarget for Firefox
+        /* jshint -W041, eqeqeq:false */
+            // null coords for Chrome and Safari Windows
+        return ((qq.chrome() || (qq.safari() && qq.windows())) && e.clientX == 0 && e.clientY == 0) ||
+            // null e.relatedTarget for Firefox
+            (qq.firefox() && !e.relatedTarget);
     }
 
     function setupDragDrop() {
@@ -199,6 +200,8 @@ qq.DragAndDrop = function(o) {
         });
     }
 
+    setupDragDrop();
+
     return {
         setupExtraDropzone: function(element) {
             options.dropZoneElements.push(element);
@@ -226,6 +229,8 @@ qq.DragAndDrop = function(o) {
 };
 
 qq.DragAndDrop.callbacks = function() {
+    "use strict";
+
     return {
         processingDroppedFiles: function() {},
         processingDroppedFilesComplete: function(files) {},
@@ -235,7 +240,7 @@ qq.DragAndDrop.callbacks = function() {
         dropLog: function(message, level) {
             qq.log(message, level);
         }
-    }
+    };
 };
 
 qq.UploadDropZone = function(o){
