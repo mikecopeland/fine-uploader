@@ -1,3 +1,5 @@
+/* globals qq */
+/* jshint -W065 */
 /**
  * Module responsible for rendering all Fine Uploader UI templates.  This module also asserts at least
  * a limited amount of control over the template elements after they are added to the DOM.
@@ -153,9 +155,8 @@ qq.Templating = function(spec) {
         // If there is a drop area defined in the template, and the current UA doesn't support DnD,
         // and the drop area is marked as "hide before enter", ensure it is hidden as the DnD module
         // will not do this (since we will not be loading the DnD module)
-        if (dropArea
-            && !qq.supportedFeatures.fileDrop
-            && qq(dropArea).hasAttribute(HIDE_DROPZONE_ATTR)) {
+        if (dropArea && !qq.supportedFeatures.fileDrop &&
+            qq(dropArea).hasAttribute(HIDE_DROPZONE_ATTR)) {
 
             qq(dropArea).css({
                 display: "none"
@@ -193,7 +194,7 @@ qq.Templating = function(spec) {
         return {
             template: qq.trimStr(tempTemplateEl.innerHTML),
             fileTemplate: qq.trimStr(fileListHtml)
-        }
+        };
     }
 
     function getFile(id) {
@@ -387,7 +388,7 @@ qq.Templating = function(spec) {
 
             container.innerHTML = templateHtml.template;
             hide(getDropProcessing());
-            fileList = options.fileContainerEl || getTemplateEl(container, selectorClasses.list)
+            fileList = options.fileContainerEl || getTemplateEl(container, selectorClasses.list);
 
             log("Template rendering complete");
         },
