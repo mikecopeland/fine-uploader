@@ -1,20 +1,30 @@
 /*globals qq, File, XMLHttpRequest, FormData, Blob*/
 qq.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged, logCallback) {
     "use strict";
-    
+
     var uploadComplete = uploadCompleteCallback,
         log = logCallback,
         fileState = [],
         cookieItemDelimiter = "|",
         chunkFiles = options.chunking.enabled && qq.supportedFeatures.chunking,
         resumeEnabled = options.resume.enabled && chunkFiles && qq.supportedFeatures.resume,
-        resumeId = getResumeId(),
         multipart = options.forceMultipart || options.paramsInBody,
         internalApi = {},
-        publicApi;
+        publicApi, resumeId;
 
+    function getResumeId() {
+        if (options.resume.id !== null &&
+            options.resume.id !== undefined &&
+            !qq.isFunction(options.resume.id) &&
+            !qq.isObject(options.resume.id)) {
 
-     function addChunkingSpecificParams(id, params, chunkData) {
+            return options.resume.id;
+        }
+    }
+
+    resumeId = getResumeId();
+
+    function addChunkingSpecificParams(id, params, chunkData) {
         var size = publicApi.getSize(id),
             name = publicApi.getName(id);
 
@@ -389,16 +399,6 @@ qq.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged, l
         return cookieName;
     }
 
-    function getResumeId() {
-        if (options.resume.id !== null &&
-            options.resume.id !== undefined &&
-            !qq.isFunction(options.resume.id) &&
-            !qq.isObject(options.resume.id)) {
-
-            return options.resume.id;
-        }
-    }
-
     function calculateRemainingChunkIdxsAndUpload(id, firstChunkIndex) {
         var currentChunkIndex;
 
@@ -433,7 +433,7 @@ qq.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged, l
                     onResumeSuccess(id, name, firstChunkIndex, persistedChunkInfoForResume);
                 },
                 function() {
-                    log("onResume promise fulfilled - failure indicated.  Will not resume.")
+                    log("onResume promise fulfilled - failure indicated.  Will not resume.");
                     calculateRemainingChunkIdxsAndUpload(id, firstChunkIndex);
                 }
             );
