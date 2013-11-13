@@ -34,7 +34,7 @@
         }
         else {
             if (namespace) {
-                return new qq[namespace]["FineUploader"](params);
+                return new qq[namespace].FineUploader(params);
             }
 
             return new qq.FineUploader(params);
@@ -183,9 +183,8 @@
         var transformedVal = val;
 
         // If the command is returning an `HTMLElement` or `HTMLDocument`, wrap it in a `jQuery` object
-        if(val != null && typeof val === "object"
-            && (val.nodeType === 1 || val.nodeType === 9)
-            && val.cloneNode) {
+        if (val != null && typeof val === "object" &&
+           (val.nodeType === 1 || val.nodeType === 9) && val.cloneNode) {
 
             transformedVal = $(val);
         }
