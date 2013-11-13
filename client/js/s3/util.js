@@ -1,6 +1,9 @@
+/*globals qq */
 qq.s3 = qq.s3 || {};
 
 qq.s3.util = qq.s3.util || (function() {
+    "use strict";
+
     return {
         AWS_PARAM_PREFIX: "x-amz-meta-",
 
@@ -139,7 +142,7 @@ qq.s3.util = qq.s3.util || (function() {
             }
 
             if (successRedirectUrl) {
-                awsParams["success_action_redirect"] = successRedirectUrl;
+                awsParams.success_action_redirect = successRedirectUrl;
             }
 
             if (reducedRedundancy) {
@@ -165,7 +168,7 @@ qq.s3.util = qq.s3.util || (function() {
                 },
                 function(errorMessage) {
                     errorMessage = errorMessage || "Can't continue further with request to S3 as we did not receive " +
-                                                   "a valid signature and policy from the server."
+                                                   "a valid signature and policy from the server.";
 
                     log("Policy signing failed.  " + errorMessage, "error");
                     promise.failure(errorMessage);
@@ -195,6 +198,7 @@ qq.s3.util = qq.s3.util || (function() {
         },
 
         getPolicyExpirationDate: function(date) {
+            /*jshint -W014 */
             // Is this going to be a problem if we encounter this moments before 2 AM just before daylight savings time ends?
             date.setMinutes(date.getMinutes() + 5);
 
@@ -202,7 +206,7 @@ qq.s3.util = qq.s3.util || (function() {
                 return date.toISOString();
             }
             else {
-                function pad(number) {
+                var pad = function(number) {
                     var r = String(number);
 
                     if ( r.length === 1 ) {
@@ -210,7 +214,7 @@ qq.s3.util = qq.s3.util || (function() {
                     }
 
                     return r;
-                }
+                };
 
                 return date.getUTCFullYear()
                         + '-' + pad( date.getUTCMonth() + 1 )
