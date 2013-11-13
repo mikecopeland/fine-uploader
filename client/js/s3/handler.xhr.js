@@ -1,3 +1,4 @@
+/*globals qq */
 /**
  * Upload handler used by the upload to S3 module that depends on File API support, and, therefore, makes use of
  * `XMLHttpRequest` level 2 to upload `File`s and `Blob`s directly to S3 buckets via the associated AWS API.
@@ -143,6 +144,7 @@ qq.s3.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged
     // Determine if the upload should be restarted on the next retry attempt
     // based on the error code returned in the response from AWS.
     function shouldResetOnRetry(errorCode) {
+        /*jshint -W014 */
         return errorCode === "EntityTooSmall"
             || errorCode === "InvalidPart"
             || errorCode === "InvalidPartOrder"
@@ -322,6 +324,7 @@ qq.s3.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged
      * @returns {qq.Promise}
      */
     function generateAwsParams(id) {
+        /*jshint -W040 */
         var customParams = paramsStore.getParams(id);
         customParams[filenameParam] = publicApi.getName(id);
 
@@ -561,7 +564,7 @@ qq.s3.UploadHandlerXhr = function(options, uploadCompleteCallback, onUuidChanged
      * @returns {number} The 0-based index of the next file chunk to be sent to S3
      */
     function getNextPartIdxToSend(id) {
-        return fileState[id].chunking.lastSent >= 0 ? fileState[id].chunking.lastSent + 1 : 0
+        return fileState[id].chunking.lastSent >= 0 ? fileState[id].chunking.lastSent + 1 : 0;
     }
 
     /**
