@@ -1,3 +1,4 @@
+/* global qq */
 qq.FileButtonsClickHandler = function(s) {
     "use strict";
 
