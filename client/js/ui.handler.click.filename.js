@@ -1,3 +1,4 @@
+/*globals qq */
 // Child of FilenameEditHandler.  Used to detect click events on filename display elements.
 qq.FilenameClickHandler = function(s) {
     "use strict";
