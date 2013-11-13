@@ -1,4 +1,7 @@
+/* globals qq */
 qq.supportedFeatures = (function () {
+    "use strict";
+
     var supportsUploading,
         supportsAjaxFileUploading,
         supportsFolderDrop,
@@ -123,6 +126,6 @@ qq.supportedFeatures = (function () {
         folderSelection: supportsFolderSelection,
         imagePreviews: supportsImagePreviews,
         pause: supportsChunking
-    }
+    };
 
 }());
