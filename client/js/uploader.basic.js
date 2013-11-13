@@ -1,4 +1,7 @@
+/*globals qq */
 qq.FineUploaderBasic = function(o) {
+    "use strict";
+
     // These options define FineUploaderBasic mode.
     this._options = {
         debug: false,
