@@ -1,3 +1,4 @@
+/* globals qq */
 /**
  * Common APIs exposed to creators of upload via form/iframe handlers.  This is reused and possibly overridden
  * in some cases by specific form upload handlers.
@@ -320,8 +321,8 @@ qq.UploadHandlerFormApi = function(internalApi, fileState, isCors, inputName, on
         },
 
         isValid: function(id) {
-            return fileState[id] !== undefined
-                && fileState[id].input !== undefined;
+            return fileState[id] !== undefined &&
+                fileState[id].input !== undefined;
         },
 
         reset: function() {
